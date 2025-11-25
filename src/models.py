@@ -22,10 +22,10 @@ class User(db.Model):
 
 class People(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
-    email: Mapped[str] = mapped_column(
+    age: Mapped[str] = mapped_column(
         String(120), unique=True, nullable=False)
-    password: Mapped[str] = mapped_column(nullable=False)
-    is_active: Mapped[bool] = mapped_column(Boolean(), nullable=False)
+    height: Mapped[str] = mapped_column(nullable=False)
+    weight: Mapped[bool] = mapped_column(Boolean(), nullable=False)
 
     def serialize(self):
         return {
@@ -36,8 +36,8 @@ class People(db.Model):
     
 class FavoritPeople(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
-    id_user: Mapped[int] = mapped_column(ForeignKey("user.id"),primary_key=True)
-    id_people: Mapped[int] = mapped_column(ForeignKey("people.id"),primary_key=True)
+    id_user: Mapped[int] = mapped_column(db.ForeignKey("user.id"),primary_key=True)
+    id_people: Mapped[int] = mapped_column(db.ForeignKey("people.id"),primary_key=True)
 
 
 class Planeta(db.Model):
@@ -56,5 +56,5 @@ class Planeta(db.Model):
 
 class FavoritPlaneta(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
-    id_user: Mapped[int] = mapped_column(ForeignKey("user.id"),primary_key=True)
-    id_people: Mapped[int] = mapped_column(ForeignKey("people.id"),primary_key=True)
+    id_user: Mapped[int] = mapped_column(db.ForeignKey("user.id"),primary_key=True)
+    id_planeta: Mapped[int] = mapped_column(db.ForeignKey("planeta.id"),primary_key=True)
